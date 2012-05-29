@@ -21,7 +21,7 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_MODULE_TAGS := optional
 
 # Include the UMP header files
-LOCAL_C_INCLUDES := device/allwinner/a10/include
+LOCAL_C_INCLUDES := device/allwinner/lyf1/include
 
 LOCAL_SRC_FILES := lights.c
 

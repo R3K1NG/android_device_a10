@@ -21,7 +21,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
 
-LOCAL_C_INCLUDES := device/allwinner/a10/include
+LOCAL_C_INCLUDES := device/allwinner/lyf1/include
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
