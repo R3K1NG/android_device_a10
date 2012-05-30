@@ -64,4 +64,10 @@ PRODUCT_COPY_FILES += \
 	device/allwinner/a10/prebuilt/bin/ntfs-3g:system/bin/ntfs-3g \
 	device/allwinner/a10/prebuilt/bin/ntfs-3g.probe:system/bin/ntfs-3g.probe 
 
+#rootfs?
+PRODUCT_COPY_FILES += \
+	device/allwinner/a10/init.sun4i.rc:root/init.sun4i.rc \
+	device/allwinner/a10/init.sun4i.usb.rc:root/init.sun4i.usb.rc \
+	device/allwinner/a10/ueventd.sun4i.rc:root/ueventd.sun4i.rc \
+	device/allwinner/a10/kernel:kernel
 #end of a10-blobs.mk

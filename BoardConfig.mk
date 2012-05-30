@@ -30,7 +30,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
 
-#TARGET_CUSTOM_RELEASETOOL := ./device/allwinner/a10/releasetools/squisher
+TARGET_CUSTOM_RELEASETOOL := ./device/allwinner/a10/releasetools/squisher
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/allwinner/a10/vibrator.c
@@ -69,8 +69,11 @@ WIFI_DRIVER_FW_PATH_STA     := 8192cu
 WIFI_DRIVER_FW_PATH_AP      := 8192cu
 WIFI_DRIVER_SOCKET_IFACE    := wlan0
 
+
+#TARGET_KERNEL_CONFIG=sun4i_crane_defconfig
+
 # Beware: set only prebuilt OR source+config
 TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/allwinner/a10/kernel
-BOARD_KERNEL_CMDLINE := console=tty0,115200 rw init=/init loglevel=3
+BOARD_KERNEL_CMDLINE := console=tty0,115200 root=/dev/nandc rw init=/init loglevel=8
 BOARD_KERNEL_BASE := 0x40000000
 BOARD_PAGE_SIZE := 2048

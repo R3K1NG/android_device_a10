@@ -18,6 +18,7 @@ PRODUCT_CHARACTERISTICS := tablet
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.root_access=3 \
 	ro.com.google.locationfeatures=1 \
 	ro.media.dec.jpeg.memcap=20000000 \
 	dalvik.vm.lockprof.threshold=500 \
@@ -26,7 +27,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.dexopt-data-only=1 \
 	ro.vold.umsdirtyratio=20 \
 	net.dns1=8.8.8.8 \
-	net.dns2=8.8.4.4 
+	net.dns2=8.8.4.4  \
+	ro.sf.lcd_density=120
 
 DEVICE_PACKAGE_OVERLAYS := device/allwinner/a10/overlay
 

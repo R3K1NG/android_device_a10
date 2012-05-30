@@ -12,20 +12,19 @@ on early-init
 
 on fs
 
-        symlink /dev/block/nanda /dev/block/bootloader
         symlink /dev/block/nandc /dev/block/boot
         symlink /dev/block/nandd /dev/block/system
         symlink /dev/block/nande /dev/block/data
         symlink /dev/block/nandg /dev/block/recovery
         symlink /dev/block/nandh /dev/block/cache
 
-        #exec /system/bin/e2fsck -y /dev/block/system 
-        #exec /system/bin/e2fsck -y /dev/block/data 
-        #exec /system/bin/e2fsck -y /dev/block/cache
+        exec /system/bin/e2fsck -y /dev/block/system 
+        exec /system/bin/e2fsck -y /dev/block/data 
+        exec /system/bin/e2fsck -y /dev/block/cache
 
-        mount ext4 /dev/block/system /system wait ro noatime nodev barrier=0 nobh data=writeback noauto_da_alloc
-        mount ext4 /dev/block/data /data wait noatime nodev barrier=0 nobh data=writeback noauto_da_alloc
-        mount ext4 /dev/block/cache /cache wait noatime nodev barrier=0 nobh data=writeback noauto_da_alloc
+        mount ext4 /dev/block/system /system wait ro noatime nodev  nobh
+        mount ext4 /dev/block/data /data wait noatime nodev barrier=0 nobh 
+        mount ext4 /dev/block/cache /cache wait noatime nodev barrier=0 nobh
 
 on post-fs
 
@@ -39,11 +38,6 @@ on post-fs
         write /sys/class/rfkill/rfkill0/state 0
         setprop rw.bluetooth.status "0"
 
-on post-fs-data
-        mkdir /data/misc/wifi 0771 wifi wifi
-        mkdir /data/misc/wifi/sockets 0771 wifi wifi
-        mkdir /data/misc/dhcp 0771 dhcp dhcp
-
 on boot
 
         insmod /system/lib/modules/sun4i-vibrator.ko #Vibrator
@@ -53,6 +47,8 @@ on boot
         insmod /system/lib/modules/videobuf-dma-contig.ko
         insmod /system/lib/modules/mma7660.ko #Gsensor
         insmod /system/lib/modules/gt2005.ko
+        insmod /system/lib/modules/gc0308.ko
+        insmod /system/lib/modules/sun4i_csi1.ko
         insmod /system/lib/modules/sun4i_csi0.ko
         insmod /system/lib/modules/usbnet.ko #USB Internet sharing
         insmod /system/lib/modules/asix.ko
@@ -64,6 +60,16 @@ on boot
         insmod /system/lib/modules/btusb.ko
         insmod /system/lib/modules/pl2303.ko
         insmod /system/lib/modules/tun.ko
+        insmod /system/lib/modules/zinitix_touch.ko
+        insmod /system/lib/modules/sun4i-ts.ko
+        insmod /system/lib/modules/goodix_touch_jixiangxing.ko
+        insmod /system/lib/modules/hv2605.ko
+        insmod /system/lib/modules/ekt2201.ko
+        insmod /system/lib/modules/ldt6124.ko
+        insmod /system/lib/modules/bma250.ko
+        insmod /system/lib/modules/mma7660.ko
+        insmod /system/lib/modules/mma8452q.ko
+        insmod /system/lib/modules/stk8312.ko
 
         #for stock roms
         insmod /system/vendor/modules/sun4i-vibrator.ko #Vibrator
@@ -72,7 +78,9 @@ on boot
         insmod /system/vendor/modules/videobuf-core.ko
         insmod /system/vendor/modules/videobuf-dma-contig.ko
         insmod /system/vendor/modules/mma7660.ko #Gsensor
+        insmod /system/vendor/modules/gc0308.ko
         insmod /system/vendor/modules/gt2005.ko
+        insmod /system/vendor/modules/sun4i_csi1.ko
         insmod /system/vendor/modules/sun4i_csi0.ko
         insmod /system/vendor/modules/usbnet.ko #USB Internet sharing
         insmod /system/vendor/modules/asix.ko
@@ -84,15 +92,25 @@ on boot
         insmod /system/vendor/modules/btusb.ko
         insmod /system/vendor/modules/pl2303.ko
         insmod /system/vendor/modules/tun.ko
+        insmod /system/vendor/modules/zinitix_touch.ko
+        insmod /system/vendor/modules/sun4i-ts.ko
+        insmod /system/vendor/modules/goodix_touch_jixiangxing.ko
+        insmod /system/vendor/modules/hv2605.ko
+        insmod /system/vendor/modules/ekt2201.ko
+        insmod /system/vendor/modules/ldt6124.ko
+        insmod /system/vendor/modules/bma250.ko
+        insmod /system/vendor/modules/mma7660.ko
+        insmod /system/vendor/modules/mma8452q.ko
+        insmod /system/vendor/modules/stk8312.ko
 
         chown system system /sys/class/timed_output/sun4i-vibrator/enable
         write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor fantasy
 
 # wifi related service
-service wpa_supplicant /system/bin/wpa_supplicant -D wext -i wlan0 \
-	-c /data/misc/wifi/wpa_supplicant.conf -e /data/misc/wifi/entropy.bin
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 \
+	-c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
     class main
-    socket wpa_wlan0 dgram 0660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi
     group system wifi inet
     disabled
     oneshot
@@ -138,4 +156,5 @@ on property:service.adb.tcp.port=5555
 on property:service.adb.tcp.port=-1
     stop adbd
     start adbd
+
 
