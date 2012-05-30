@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_lyf1.mk
+    $(LOCAL_DIR)/full_a10.mk

@@ -6,8 +6,8 @@
 echo "ALLWINNER SQUISHER"
 echo "================"
 
-DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/lyf1
-DEVICE_TOP=$ANDROID_BUILD_TOP/device/allwinner/lyf1
+DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/a10
+DEVICE_TOP=$ANDROID_BUILD_TOP/device/allwinner/a10
 VENDOR_TOP=$ANDROID_BUILD_TOP/device/allwinner/prebuilt
 
 CL_PFX="\033[33m"

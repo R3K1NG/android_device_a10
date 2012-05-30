@@ -30,10 +30,10 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
 
-TARGET_CUSTOM_RELEASETOOL := ./device/allwinner/lyf1/releasetools/squisher
+#TARGET_CUSTOM_RELEASETOOL := ./device/allwinner/a10/releasetools/squisher
 
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/allwinner/lyf1/vibrator.c
+BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/allwinner/a10/vibrator.c
 BOARD_HAS_SDCARD_INTERNAL := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH = "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
@@ -47,14 +47,14 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 #EGL stuff
-BOARD_EGL_CFG := device/allwinner/lyf1/egl.cfg
+BOARD_EGL_CFG := device/allwinner/a10/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_USE_SKIA_LCDTEXT := true
 
 #Recovery Stuff
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/allwinner/lyf1/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/allwinner/a10/recovery_keys.c
 BOARD_USE_LEGACY_TOUCHSCREEN := true
 TARGET_RECOVERY_PRE_COMMAND := "echo -n boot-recovery | dd of=/dev/block/nandf count=1 conv=sync; sync;"
 
@@ -62,7 +62,7 @@ TARGET_RECOVERY_PRE_COMMAND := "echo -n boot-recovery | dd of=/dev/block/nandf c
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
-TARGET_CUSTOM_WIFI := ../../device/allwinner/lyf1/wifi.c
+TARGET_CUSTOM_WIFI := ../../device/allwinner/a10/wifi.c
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/8192cu.ko"
 WIFI_DRIVER_MODULE_NAME     := 8192cu
 WIFI_DRIVER_FW_PATH_STA     := 8192cu
@@ -70,4 +70,7 @@ WIFI_DRIVER_FW_PATH_AP      := 8192cu
 WIFI_DRIVER_SOCKET_IFACE    := wlan0
 
 # Beware: set only prebuilt OR source+config
-TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/allwinner/lyf1/kernel
+TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/allwinner/a10/kernel
+BOARD_KERNEL_CMDLINE := console=tty0,115200 rw init=/init loglevel=3
+BOARD_KERNEL_BASE := 0x40000000
+BOARD_PAGE_SIZE := 2048
